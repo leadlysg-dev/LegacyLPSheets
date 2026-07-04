@@ -1,0 +1,6 @@
+# Place this file at the ROOT of your repo (same level as index.html).
+# It tells Netlify where your serverless functions live.
+
+[build]
+  publish = "."
+  functions = "netlify/functions"
