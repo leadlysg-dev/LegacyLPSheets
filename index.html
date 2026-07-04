@@ -719,29 +719,21 @@ alt=""/></noscript>
     };
 
     // ============================================================
-    //  DESTINATIONS
-    //  1) GHL   — client-side Inbound Webhook (cross-origin, fire-and-forget)
-    //  2) SHEET — your Netlify Function, which writes to Google Sheets
-    //             via the official Sheets API (server-side, secure).
+    //  ONE endpoint — your Netlify Function — which writes to Google
+    //  Sheets AND forwards to GHL server-side. Configure both via
+    //  Netlify environment variables (GHL_WEBHOOK_URL, SHEET_ID, etc.).
     // ============================================================
-    var GHL_WEBHOOK_URL = "";                                 // <-- paste GHL Inbound Webhook URL (optional)
-    var SHEET_API_URL   = "/.netlify/functions/submit-lead";  // Netlify Function (leave as-is)
+    var LEAD_API_URL = "/.netlify/functions/submit-lead"; // leave as-is
 
     var body = JSON.stringify(payload);
-
-    function sendGHL(){
-      if(!GHL_WEBHOOK_URL) return Promise.resolve();
-      return fetch(GHL_WEBHOOK_URL, { method:'POST', mode:'no-cors',
-        headers:{'Content-Type':'text/plain;charset=UTF-8'}, body: body, keepalive:true }).catch(function(){});
-    }
-    function sendSheet(){
-      if(!SHEET_API_URL) return Promise.resolve();
-      return fetch(SHEET_API_URL, { method:'POST',
-        headers:{'Content-Type':'application/json'}, body: body, keepalive:true }).catch(function(){});
-    }
-
     submitBtn.disabled = true; submitBtn.textContent = "Sending…";
-    Promise.all([ sendGHL(), sendSheet() ]).then(function(){ finish(payload); });
+    fetch(LEAD_API_URL, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: body,
+      keepalive:true
+    }).then(function(){ finish(payload); })
+      .catch(function(){ finish(payload); });
   });
 
   function finish(payload){

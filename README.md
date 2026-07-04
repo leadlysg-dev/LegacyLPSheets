@@ -39,10 +39,12 @@ How to get the service account:
      (You do NOT need to pre-make daily tabs — the function creates each
       day's tab automatically, with a bold, frozen header row.)
 
-## 3. GoHighLevel  (optional — in index.html)
-- In `index.html` paste your GHL Inbound Webhook URL into:  var GHL_WEBHOOK_URL = "";
-- In GHL: Automations > Workflows > Trigger "Inbound Webhook" > then
-  Create/Update Contact (map phone/email + custom fields) > Add Tag.
+## 3. GoHighLevel  (Netlify environment variable + a GHL workflow)
+- Add a Netlify env var:  GHL_WEBHOOK_URL = your GHL Inbound Webhook URL
+  (The page no longer holds this URL — it's server-side now.)
+- In GHL: Automations > Workflows > Trigger "Inbound Webhook" (copy that URL
+  into the env var above) > then Create/Update Contact (map phone/email +
+  custom fields) > Add Tag.
 
 ## 4. Meta ad URL parameters (for attribution)
 In each ad's "URL parameters" field, paste:
