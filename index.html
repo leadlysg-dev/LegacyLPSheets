@@ -479,15 +479,9 @@ alt=""/></noscript>
         <div class="err" data-err="fPhone">Please enter a valid mobile number.</div>
       </div>
 
-      <div class="field">
-        <label for="fEmail">Email <span class="opt-tag">(optional)</span></label>
-        <input id="fEmail" name="email" type="email" autocomplete="email" placeholder="you@email.com">
-        <div class="err" data-err="fEmail">Please check your email address.</div>
-      </div>
-
       <label class="consent">
-        <input type="checkbox" id="fConsent">
-        <span>I agree to be contacted by Legacy Planner (Income Insurance Limited) by phone, WhatsApp or email about my assessment. I understand my details are handled in line with the PDPA and I can opt out anytime.</span>
+        <input type="checkbox" id="fConsent" checked>
+        <span>I agree to be contacted by Legacy Planner (Income Insurance Limited) by phone or WhatsApp about my assessment. I understand my details are handled in line with the PDPA and I can opt out anytime.</span>
       </label>
       <div class="err" data-err="fConsent" style="margin-bottom:6px;">Please tick the box so we can reach you.</div>
 
@@ -656,18 +650,16 @@ alt=""/></noscript>
     var name = document.getElementById('fName').value.trim();
     var cc = document.getElementById('fCC').value.trim();
     var phone = document.getElementById('fPhone').value.replace(/[^0-9]/g,'');
-    var email = document.getElementById('fEmail').value.trim();
     var consent = document.getElementById('fConsent').checked;
 
-    setErr('fName', false); setErr('fPhone', false); setErr('fEmail', false); setErr('fConsent', false);
+    setErr('fName', false); setErr('fPhone', false); setErr('fConsent', false);
 
     if(name.length < 2){ setErr('fName', true); ok = false; }
     if(phone.length < 7){ setErr('fPhone', true); ok = false; }
-    if(email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ setErr('fEmail', true); ok = false; }
     if(!consent){ setErr('fConsent', true); ok = false; }
 
     if(ok){
-      contact = { full_name:name, country_code:cc, mobile:phone, full_number: cc + phone, email:email, consent:true };
+      contact = { full_name:name, country_code:cc, mobile:phone, full_number: cc + phone, consent:true };
     }
     return ok;
   }
@@ -692,7 +684,6 @@ alt=""/></noscript>
       full_name:              contact.full_name,
       phone:                  contact.full_number,   // E.164, e.g. +6591234567
       mobile:                 contact.full_number,
-      email:                  contact.email,
       consent:                contact.consent,
       // --- assessment answers (map to GHL custom fields) ---
       age_band:               answers.age,

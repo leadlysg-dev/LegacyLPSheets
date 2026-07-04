@@ -23,7 +23,7 @@
 const crypto = require('crypto');
 
 const HEADERS = [
-  'Date Added (SGT)', 'Name', 'Mobile', 'Email',
+  'Date Added (SGT)', 'Name', 'Mobile',
   'Age', 'Target Retire Age', 'Desired Monthly Income', 'Preparedness', 'Has Plan',
   'Estate Done', 'Estate Gaps (call notes)', 'Consent',
   'Source', 'UTM Campaign', 'UTM Content (Ad)', 'UTM Term (Ad Set)', 'FBCLID', 'Landing URL'
@@ -153,7 +153,7 @@ async function writeToSheet(d) {
 
   await appendRow(token, today.tab, [
     today.stamp,
-    d.full_name || '', d.mobile || d.phone || '', d.email || '',
+    d.full_name || '', d.mobile || d.phone || '',
     d.age_band || '', d.target_retire_age || '', d.desired_monthly_income || '',
     d.preparedness || '', d.has_retirement_plan || '',
     d.estate_done_text || '', d.estate_gaps_text || '', d.consent ? 'Yes' : 'No',
