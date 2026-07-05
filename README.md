@@ -16,9 +16,7 @@ A single-page landing site (Meta ads → questionnaire → GHL + Google Sheet).
 ============================================================
 
 ## 1. Meta Pixel  (in index.html)
-- Open `index.html`, Find & Replace `YOUR_PIXEL_ID` with your real Pixel ID.
-  It appears twice. The Pixel ID must be the same dataset selected in your ad set
-  ("Retirement Lead LP").
+- DONE. Pixel ID 1029475639468237 ("Retirement Lead LP") is already in index.html.
 
 ## 2. Google Sheet via the API  (Netlify environment variables)
 Create these in Netlify > Site configuration > Environment variables:
